@@ -34,6 +34,53 @@ jobs:
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
         nmake -f lunar.mak
       shell: cmd
+    - uses: actions/upload-artifact@v4
+      with:
+        name: windows-binaries
+        path: |
+          add_off.exe
+          add_off.cgi.exe
+          adestest.exe
+          astcheck.exe
+          astephem.exe
+          calendar.exe
+          cgicheck.exe
+          chinese.exe
+          colors.exe
+          colors2.exe
+          cosptest.exe
+          csv2ades.exe
+          dist.exe
+          easter.exe
+          get_test.exe
+          gtest.exe
+          htc20b.exe
+          jd.exe
+          jevent.exe
+          jpl2b32.exe
+          jsattest.exe
+          lun_test.exe
+          marstime.exe
+          moidtest.exe
+          mpc2sof.exe
+          mpc_time.exe
+          oblitest.exe
+          parallax.exe
+          parallax.cgi.exe
+          persian.exe
+          phases.exe
+          prectes2.exe
+          prectest.exe
+          ps_1996
+          ssattest.exe
+          tables.exe
+          test_des.exe
+          testprec.exe
+          test_ref.exe
+          them_cat.exe
+          themis.exe
+          uranus1.exe
+          utc_test.exe
 
   buildWindowsX86:
     runs-on: windows-latest
