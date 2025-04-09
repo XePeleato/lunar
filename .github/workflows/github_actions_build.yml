@@ -1,94 +1,143 @@
 name: Buildd
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   buildUbuntu:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master
-    - name: make
-      run: make ERRORS=Y
-    - name: Archive lib
-      uses: actions/upload-artifact@v4
-      with:
-         name: lib
-         path: liblunar.a
+      - uses: actions/checkout@master
+      - name: make
+        run: make ERRORS=Y
+      - name: Archive lib
+        uses: actions/upload-artifact@v4
+        with:
+          name: lib
+          path: liblunar.a
 
   buildOSX:
     runs-on: macOS-latest
 
     steps:
-    - uses: actions/checkout@master
-    - name: make
-      run: make CLANG=Y ERRORS=Y
+      - uses: actions/checkout@master
+      - name: make
+        run: make CLANG=Y ERRORS=Y
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macOs-binaries
+          path: |
+            add_off
+            add_off.cgi
+            adestest
+            astcheck
+            astephem
+            calendar
+            cgicheck
+            chinese
+            colors
+            colors2
+            cosptest
+            csv2ades
+            dist
+            easter
+            get_test
+            gtest
+            htc20b
+            jd
+            jevent
+            jpl2b32
+            jsattest
+            lun_test
+            marstime
+            moidtest
+            mpc2sof
+            mpc_time
+            oblitest
+            parallax
+            parallax.cgi
+            persian
+            phases
+            prectes2
+            prectest
+            ps_1996
+            ssattest
+            tables
+            test_des
+            testprec
+            test_ref
+            them_cat
+            themis
+            uranus1
+            utc_test
 
+          args:
+          entrypoint:
   buildWindowsX64:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@master
-    - name: make
-      run: |
-        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
-        nmake -f lunar.mak
-      shell: cmd
-    - uses: actions/upload-artifact@v4
-      with:
-        name: windows-binaries
-        path: |
-          add_off.exe
-          add_off.cgi.exe
-          adestest.exe
-          astcheck.exe
-          astephem.exe
-          calendar.exe
-          cgicheck.exe
-          chinese.exe
-          colors.exe
-          colors2.exe
-          cosptest.exe
-          csv2ades.exe
-          dist.exe
-          easter.exe
-          get_test.exe
-          gtest.exe
-          htc20b.exe
-          jd.exe
-          jevent.exe
-          jpl2b32.exe
-          jsattest.exe
-          lun_test.exe
-          marstime.exe
-          moidtest.exe
-          mpc2sof.exe
-          mpc_time.exe
-          oblitest.exe
-          parallax.exe
-          parallax.cgi.exe
-          persian.exe
-          phases.exe
-          prectes2.exe
-          prectest.exe
-          ps_1996
-          ssattest.exe
-          tables.exe
-          test_des.exe
-          testprec.exe
-          test_ref.exe
-          them_cat.exe
-          themis.exe
-          uranus1.exe
-          utc_test.exe
+      - uses: actions/checkout@master
+      - name: make
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+          nmake -f lunar.mak
+        shell: cmd
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-binaries
+          path: |
+            add_off.exe
+            add_off.cgi.exe
+            adestest.exe
+            astcheck.exe
+            astephem.exe
+            calendar.exe
+            cgicheck.exe
+            chinese.exe
+            colors.exe
+            colors2.exe
+            cosptest.exe
+            csv2ades.exe
+            dist.exe
+            easter.exe
+            get_test.exe
+            gtest.exe
+            htc20b.exe
+            jd.exe
+            jevent.exe
+            jpl2b32.exe
+            jsattest.exe
+            lun_test.exe
+            marstime.exe
+            moidtest.exe
+            mpc2sof.exe
+            mpc_time.exe
+            oblitest.exe
+            parallax.exe
+            parallax.cgi.exe
+            persian.exe
+            phases.exe
+            prectes2.exe
+            prectest.exe
+            ps_1996.exe
+            ssattest.exe
+            tables.exe
+            test_des.exe
+            testprec.exe
+            test_ref.exe
+            them_cat.exe
+            themis.exe
+            uranus1.exe
+            utc_test.exe
 
   buildWindowsX86:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@master
-    - name: make
-      run: |
-        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
-        nmake -f lunar.mak BITS_32=Y
-      shell: cmd      
+      - uses: actions/checkout@master
+      - name: make
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
+          nmake -f lunar.mak BITS_32=Y
+        shell: cmd
